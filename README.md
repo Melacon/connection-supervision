@@ -79,3 +79,25 @@ package "Grafana" {
   [Grafana] --> [InfluxDB]
 }
 @enduml
+```
+
+### Sequence Diagram
+
+```plantuml
+@startuml
+actor User
+participant PingService
+participant InfluxDB
+participant Grafana
+
+User -> PingService: Start Service
+PingService -> InfluxDB: Create Database
+loop Every DELAY seconds
+    PingService -> PingService: Ping TARGET 4 times
+    PingService -> InfluxDB: Send Ping Results
+end
+User -> Grafana: Access Dashboard
+Grafana -> InfluxDB: Query Ping Results
+InfluxDB -> Grafana: Return Ping Results
+@enduml
+```
