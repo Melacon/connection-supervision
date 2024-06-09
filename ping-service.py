@@ -14,6 +14,7 @@
 # limitations under the License.
 ################################################################################
 
+import datetime
 import os
 import time
 import subprocess
@@ -30,7 +31,7 @@ def ping(target):
 
 def parse_ping_output(output):
     lines = output.split("\n")
-    summary = lines[-3:]
+    summary = lines #[-3:]
     return "\n".join(summary)
 
 def send_to_influxdb(client, target, summary):
@@ -45,12 +46,14 @@ def send_to_influxdb(client, target, summary):
                 },
                 "fields": {
                     "response_time_ms": float(time_ms)
-                }
+                },
+                "time": datetime.datetime.now(datetime.timezone.utc).isoformat()
             })
-    client.write_points(data)
+    for measurement in data:
+        client.write_points(data)
 
 if __name__ == "__main__":
-    client = InfluxDBClient(host='influxdb', port=8086)
+    client = InfluxDBClient(host='localhost', port=8086)
     client.create_database('ping_data')
     client.switch_database('ping_data')
 
@@ -59,3 +62,4 @@ if __name__ == "__main__":
         summary = parse_ping_output(output)
         send_to_influxdb(client, TARGET, summary)
         time.sleep(DELAY)
+        print(TARGET, summary)
