@@ -1,0 +1,41 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Ping Dashboard",
+    "tags": [],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "5s",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Ping Response Time",
+        "targets": [
+          {
+            "measurement": "ping",
+            "groupBy": [
+              {
+                "type": "time",
+                "params": ["$interval"]
+              }
+            ],
+            "resultFormat": "time_series",
+            "orderByTime": "ASC",
+            "tags": []
+          }
+        ],
+        "xaxis": {
+          "mode": "time"
+        },
+        "yaxes": [
+          {
+            "label": "Response Time (ms)",
+            "format": "ms"
+          }
+        ]
+      }
+    ]
+  },
+  "overwrite": false
+}
