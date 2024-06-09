@@ -15,10 +15,10 @@
 ################################################################################
 
 build:
-    docker build -t ping-service .
+	docker build -t ping-service . 
 
 run:
-    docker-compose up
+	docker-compose up
 
 stop:
-    docker-compose down
+	docker-compose down

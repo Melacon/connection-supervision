@@ -26,10 +26,22 @@ services:
     networks:
       - ping-net
 
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=ping_data
+    networks:
+      - ping-net
+      
   grafana:
     image: grafana/grafana
     ports:
       - "3000:3000"
+    environment:
+          - GF_SECURITY_ADMIN_USER=admin
+          - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
     networks:

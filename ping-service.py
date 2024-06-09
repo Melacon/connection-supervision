@@ -21,7 +21,7 @@ import subprocess
 from influxdb import InfluxDBClient
 
 DELAY = int(os.getenv("DELAY", 10))
-TARGET = os.getenv("TARGET", "google.com")
+TARGET = os.getenv("TARGET", "localhost")
 
 def ping(target):
     result = subprocess.run(["ping", "-c", "4", target], stdout=subprocess.PIPE)

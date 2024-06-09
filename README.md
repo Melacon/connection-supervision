@@ -55,7 +55,7 @@ connection-supervision/
 ## Environment Variables
 
 - `DELAY`: Delay in seconds between each set of pings (default is 10 seconds).
-- `TARGET`: Target IP address or URL to ping (default is `github.com`).
+- `TARGET`: Target IP address or URL to ping (default is `localhost`).
 
 ## Architecture
 
